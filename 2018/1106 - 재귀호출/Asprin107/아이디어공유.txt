@@ -1,0 +1,141 @@
+- 첫번째 문제
+첫번쨰 시도
+1.변수 count = 0 으로 선언 후 초기화.
+
+2. 가능한 문자열 개수 계산 : 2(N-1)! / ((N-1)! * (N-1)) -> 변수 x 
+
+3. x를 바이너리 스트링으로 변환한 값의 length 구함.
+  ex) x = 12 -> 바이너리 스트링 : "1100" , length = 4
+
+4. i를 1부터 x까지 1씩 증가하며  x를 바이너리 스트링으로 : 변환 Integer.toBinaryString(x); -> 변수 str
+
+5. str의 length가 4보다 작으면 앞에부터 0으로 채움.
+  ex) x=12, length=4,  i=5, str = "11" -> "0011"
+
+6. str을 앞자리부터 세면서 0이 1보다 많은지 체크 (1은 알약 한개를 뽑은것으로 대응(W), 0은 알약 반개를 뽑은것으로 대응(H)) a0, a1의 변수에 각각 증가시키면서 비교
+
+6-1. a0>a1인 순간은 존재할수 없음. 4번 continue
+
+6-2. str의 끝자리까지 체크하여 a0>a1인 순간이 존재하지 않는다면 count++ 후 4번 continue.
+
+7. count 반환.
+
+문제점 -> 약이 30개인 경우 2번에서 가능한 문자열이 int의 범위를 초과함 long으로 바꿔도 여전히 결과가 표현가능 값보다 큼.
+
+
+두번째 시도
+1.변수 count = 0 으로 선언 후 초기화.
+
+2. 2N-2개의 "H" 문자열 생성.
+  ex) N = 3인 경우 str = "HHHH"
+
+3. idx = str의 문자 길이
+  ex) str = "HHHH" 인 경우 idx = 4
+
+4. str의번째 문자가 H인 경우 W로 변환 후 str 반환. W인 경우는 해당 위치를 H로 변환 후 idx-1 하여 3번 재실행.
+ex1) str = "HHHH", 인경우 str -> "HHHW"
+ex2) str = "HHWW", 인 경우 str -> "HWHH"
+
+5. 3의 str을 앞자리부터 H가 W보다 많은지 체크 ah, aw 변수에 각각 증가시키면서 비교
+
+5-1. ah>aw인 순간은 존재할 수 없음. 3번 continue
+
+5-2. str의 끝자리까지 체크하여 ah>aw인 순간이 존재하지 않는다면 count++ 후 3번 continue
+
+6. str이 전부 "W"인 경우 count 반환.
+
+문제점 -> 약이 30개인 경우 문자열을 생성하는데 실행시간이 지나치게 김.
+
+
+
+
+- 두번째 문제
+
+3
+A 3 B C D
+B 2 C D
+C 1 D
+A
+
+1. 각 라인 str[]에 저장
+
+2. str[0], str[lastIdx] 제외한 모든 행의 3번째 값 int로 파싱해서 더함. 변수 size.
+ex) size 6
+
+3. initStr[size] 배열 생성 후 str[]을 이용하여 다음과 같은 룰로 문자열 생성
+ex)
+A 3 B C D 	-> initStr[0] = AB, initStr[1] = AC, initStr[2] = AD
+B 2 C D		-> initStr[3] = BC, initSTr[4] = BD 
+C 1 D		-> initStr[5] = CD
+최종 initStr[] = {AB, AC, AD, BC, BD, CD}
+
+4. testStr[] 에 initStr[]을 대입 후 idx = 0, testStr[idx] 의 시작 문자열이 'A' 인지 확인.
+
+4-1. A로 시작할 경우 count++, idx++후 4번 재실행.
+ex) testStr[idx] = AB, AC, AD의 경우 count++, idx++
+
+4-2. A로 시작하지 않을 경우 시작문자열로 끝나는 문자열 원소를 initStr[]에서 검색 후 이어붙이고 그 결과들을 testStr[]에 추가.
+ex1) testStr[idx] = BC 인 경우 시작문자열 : B
+intiStr[]에서 B로 끝나는 문자열 검색 -> AB
+이어붙인 결과 : ABC
+testStr[] = {AB, AC, AD, BD, CD, ABC}
+
+ex2) testStr[idx] = CD 인 경우 시작 문자열 : C
+initStr[]에서 C로 끝나는 문자열 검색 -> AC, BC
+이어붙인 결과 : ACD, BCD
+testStr = {AB, AC, BC, BD, ACD, BCD}
+
+5. testStr[]의 모든 문자열이 'A'로 시작되면 count +1 반환.
+
+
+전체 예시
+initStr[] = {AB, AC, AD, BC, BD, CD}
+testStr[] = {AB, AC, AD, BC, BD, CD}
+count = 0
+
+#1
+testStr = AB
+testStr[] = {AB, AC, AD, BC, BD, CD}
+count = 1
+#2
+testStr = AC
+testStr[] = {AB, AC, AD, BC, BD, CD}
+count = 2
+#3
+testStr = AD
+testStr[] = {AB, AC, AD, BC, BD, CD}
+count = 3
+#4
+testStr = BC
+testStr[] = {AB, AC, AD, ABC, BD, CD}
+count = 3
+#5
+testStr = ABC
+testStr[] = {AB, AC, AD, ABC, BD, CD}
+count = 4
+#6
+testStr = BD
+testStr[] = {AB, AC, AD, ABC, ABD, CD}
+count = 4
+#7
+testStr = ABD
+testStr[] = {AB, AC, AD, ABC, ABD, CD}
+count = 5
+#8
+testStr = CD
+testStr[] = {AB, AC, AD, ABC, ABD, ACD, BCD}
+count = 5
+#9
+testStr = ACD
+testStr[] = {AB, AC, AD, ABC, ABD, ACD, BCD}
+count = 6
+#10
+testStr = BCD
+testStr[] = {AB, AC, AD, ABC, ABD, ACD, ABCD}
+count = 6
+#11
+testStr = ABCD
+testStr[] = {AB, AC, AD, ABC, ABD, ACD, ABCD}
+count = 7
+
+count+1 = 8
