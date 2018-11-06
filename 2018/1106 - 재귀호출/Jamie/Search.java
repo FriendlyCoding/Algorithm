@@ -4,16 +4,15 @@ import java.util.Scanner;
 
 /**
  *
- * 입력된 값 input을 맵에 담고 직접적으로 링크가 연결된 사이트들에서 가리키는 웹사이들 리스트에서 제거
- *
- * 함수 하나 만들어서 맵과 타겟사이트값을 파라미터로 받아서
+ * 입력된 값 input을 맵에 담고 빈스트링 temp와 타겟 웹사이트를 파라미터로 전달
  *
  * 경우의 수에 따라 분기 및 재귀호출
+ * temp에 타겟 웹사이트가 있을시 직간접적인 연결이라고 생각함
  *
  * 하지만 런타임 오류
  *
  */
-public class Search {
+public class Main2 {
     public static void main(String[] args) throws Exception {
 
         Scanner scan = new Scanner(System.in);
@@ -40,29 +39,13 @@ public class Search {
             map.put(webs[i].split(" ")[0],webs[i]);
         }
 
-        for(int i=0; i<webs.length; i++){
-            String[] list = webs[i].split(" ");
-
-            for(int j=2; j<list.length; j++){
-                String a = list[j];
-                String b = map.get(a);
-                if(b != null){
-                    if(b.contains(a)){
-                        map.put(a, b.replace(" " + a,""));
-                        String c = b.split(" ")[0];
-                        map.put(c, map.get(c).replace(" " + list[0],""));
-                    }
-                }
-            }
-        }
-
         // 웹사이트 이름 길이제한 50 추가해야함
 
-        System.out.println(calGrade(map, web));
+        System.out.println(calGrade(map, web, ""));
 
     }
 
-    public static int calGrade(Map<String,String> map, String target){
+    public static int calGrade(Map<String,String> map, String target, String temp){
         int result = 0;
 
         String web = map.get(target);
@@ -71,26 +54,25 @@ public class Search {
             return 1; // web으로 오는 링크가 없을때 기본 점수 1점
         }
 
+        // 해당 타겟 웹사이트 행 배열로 분리
         String[] list = web.split(" ");
 
-        if(target.equals(list[0]) || list.length == 2) {
-            result += 1; // 자기 자신이 타겟일때 기본점수 1점 || 서로링크 없앤 사이트에서 오는 링크가 없어졌을 때
-        }
+        if(temp.contains(list[0])){
+            String[] webs = temp.split(",");
+            for(int i=0; i<webs.length; i++){
+                if(webs[i].equals(list[0])){
+                    System.out.println(-(webs.length - i -1));
+                    return -(webs.length - i -1);
+                }
+            } // 직간접적인 링크가 있을 경우 그동안 쌓인 1들 -로 반환
 
-        int type = 0;
-
-        for(int i=2; i<list.length; i++){
-            if(list[i].equals(target)){
-                type = 1;
-            }
-        }
-
-        if(type == 0){
+        } else {
+            temp += list[0]+","; // 직간접적인 링크가 없을 경우 temp 스트링에 타겟 웹사이트 추가
             for(int i=2; i<list.length; i++){
-                result += calGrade(map,list[i]);
+                result += calGrade(map, list[i], temp); // 링크 연결된 사이트들의 링크 연결된 사이트 확인 (말 그지같다..)
             }
         }
 
-        return result;
+        return 1 + result;
     }
 }
