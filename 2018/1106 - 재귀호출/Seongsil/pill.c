@@ -12,7 +12,7 @@ Seongsil Heo
 int main(void)
 {
 	FILE *file;
-	int i, num, cases;
+	int i, num;
 	long long cache[SIZE][SIZE];
 
 	cache[0][0] = 0;
@@ -43,35 +43,16 @@ int main(void)
 	}
 
 	file = fopen("input.txt", "r");
-	fscanf(file, "%d", &cases);
 
-	for (int i = 0; i < cases; i++)
+	while(1)
 	{
 		fscanf(file, "%d", &num);
+
+		if (num == 0)
+			break;
+
 		printf("%lld\n", cache[num][H]);
 	}
+
 	return 0;
 }
-
-
-
-
-/*Àç±ÍÇÔ¼ö - runtime error
-int recursiveNum(int w, int h)
-{
-
-if (w == 0)
-{
-return 1;
-}
-else if ((w > 0) && (h < 1))
-{
-return recursiveNum(w - 1, h + 1);
-}
-
-else
-{
-return recursiveNum(w - 1, h + 1) + recursiveNum(w, h - 1);
-
-}
-}*/
