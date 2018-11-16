@@ -7,7 +7,7 @@ int main(void)
 {
 	char *scale = malloc(sizeof(char)* 10);
 	char *result = { 0 };
-	scanf("%[^\n]s", scale);
+	scanf("%[^\n]s", scale); //scan until "\n" appears
 
 	if (!strcmp(scale, "1 2 3 4 5 6 7 8"))
 	{
