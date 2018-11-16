@@ -14,7 +14,7 @@ int main(void)
 		result *= a;
 	}
 
-	for (int i = 0; result > 0; i++) //if result가 0 이면 for문을 빠져나간다.
+	for (int i = 0; result > 0; i++) //if result is 0, break.
 	{
 		arr[result % 10] += 1;
 		result /= 10;
