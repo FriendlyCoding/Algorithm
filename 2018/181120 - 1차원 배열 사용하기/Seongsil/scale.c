@@ -5,7 +5,7 @@
 
 int main(void)
 {
-	char *scale = malloc(sizeof(char)* 50);
+	char *scale = malloc(sizeof(char)* 10);
 	char *result = { 0 };
 	scanf("%[^\n]s", scale);
 
