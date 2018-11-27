@@ -8,7 +8,7 @@ Seongsil Heo */
 
 int main(void)
 {
-	char *scale = malloc(sizeof(char)* 10); //read-only, should make a space that string could be stored
+	char *scale = malloc(sizeof(char) * 10); //read-only, should make a space that string could be stored
 	char *result = { 0 };
 	scanf("%[^\n]s", scale); //scan until "\n" appears
 
