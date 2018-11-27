@@ -1,3 +1,6 @@
+/*baekjoon- 2920. À½°è
+Seongsil Heo */
+
 #define _CRT_SECURE_NO_WARNINGS
 
 #include <stdio.h>

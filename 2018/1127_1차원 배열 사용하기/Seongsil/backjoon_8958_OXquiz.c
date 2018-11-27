@@ -1,3 +1,5 @@
+/*baekjoon- 8958. OXÄûÁî
+Seongsil Heo */
 #define _CRT_SECURE_NO_WARNINGS
 
 #include <stdio.h>
@@ -5,24 +7,27 @@
 
 int main(void)
 {
-	char OX[81];
-	int n;
+	char ox[80]; 
+	int cases;
 
-	scanf("%d", &n);
-	for (int i = 0; i < n; i++)
+	scanf("%d", &cases);
+	
+	for (int i = 0; i < cases; i++)
 	{
-		scanf("%s", &OX);
+		scanf("%s", &ox);
+
 		int score = 0;
 		int total_score = 0;
-		for (int j = 0; j < strlen(OX); j++)
+
+		for (int j = 0; j < strlen(ox); j++)
 		{
-			if (OX[j] == 'O')
+			if (ox[j] == 'O')
 			{
 				score++; 
 				total_score += score;
 			}
 
-			else if (OX[j] == 'X')
+			else if (ox[j] == 'X')
 			{
 				score = 0;
 			}

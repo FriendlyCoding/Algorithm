@@ -1,7 +1,11 @@
+/*baekjoon- 10039. Æò±Õ Á¡¼ö
+Seongsil Heo */
+
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 
 #define STUDENT_NUM 5
+
 int main(void)
 {
 	int score;
