@@ -1,4 +1,4 @@
-/*baekjoon- 8958. OXДыБо
+/*baekjoon- 8958. OXнЂґм¦€
 Seongsil Heo */
 #define _CRT_SECURE_NO_WARNINGS
 
