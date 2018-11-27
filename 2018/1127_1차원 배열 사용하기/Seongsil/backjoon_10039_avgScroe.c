@@ -1,4 +1,4 @@
-/*baekjoon- 10039. Жт±Х БЎјц
+/*baekjoon- 10039. нЏ‰к· м ђм€
 Seongsil Heo */
 
 #define _CRT_SECURE_NO_WARNINGS
