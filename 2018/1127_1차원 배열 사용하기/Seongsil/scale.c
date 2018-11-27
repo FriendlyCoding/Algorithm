@@ -5,11 +5,11 @@
 
 int main(void)
 {
-	char *scale = malloc(sizeof(char)* 50);
+	char *scale = malloc(sizeof(char)* 10); //read-only, should make a space that string could be stored
 	char *result = { 0 };
-	scanf("%[^\n]s", scale);
+	scanf("%[^\n]s", scale); //scan until "\n" appears
 
-	if (!strcmp(scale, "1 2 3 4 5 6 7 8"))
+	if (!strcmp(scale, "1 2 3 4 5 6 7 8")) //compare two strings
 	{
 		result = "ascending";
 	}
