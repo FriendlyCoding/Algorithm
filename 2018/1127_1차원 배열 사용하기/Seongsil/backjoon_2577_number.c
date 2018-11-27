@@ -1,4 +1,4 @@
-/*baekjoon- 2577. ¼ıÀÚÀÇ °³¼ö
+/*baekjoon- 2577. ìˆ«ìì˜ ê°œìˆ˜
 Seongsil Heo */
 
 #define _CRT_SECURE_NO_WARNINGS
