@@ -1,4 +1,4 @@
-/*baekjoon- 2920. ¿Ω∞Ë
+/*baekjoon- 2920. ÏùåÍ≥Ñ
 Seongsil Heo */
 
 #define _CRT_SECURE_NO_WARNINGS
