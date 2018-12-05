@@ -17,7 +17,7 @@ int main(void)
 		result *= a; // MAXIMUM 10^3*10^3*10^3 = 10*9, enough to use 'int'(less than 2,147,483,647)
 	}
 
-	for (int i = 0; result > 0; i++) //if result is 0, break.
+	for (int i = 0; 0 < result; i++) //if result is 0, break.
 	{
 		arr[result % 10] += 1; /
 		result /= 10;
